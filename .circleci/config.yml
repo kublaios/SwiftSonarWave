@@ -42,6 +42,8 @@ jobs:
           ls -la
           cd test_output
           ls -la
+          cd ..
+          cd ..
           bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
       - persist_to_workspace:
           root: "~"
