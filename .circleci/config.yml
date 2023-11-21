@@ -33,6 +33,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane test
       - run: |
           ls -la
           cd fastlane
