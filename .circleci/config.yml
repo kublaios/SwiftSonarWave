@@ -63,7 +63,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - clone
+      - run-tests
       - analyze:
           requires:
-            - clone
+            - run-tests
