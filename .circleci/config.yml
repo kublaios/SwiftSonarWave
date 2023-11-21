@@ -20,6 +20,7 @@ jobs:
           command: bundle exec fastlane build
 
   analyze:
+    working_directory: ~/project
     docker:
       - image: node:latest
     steps:
