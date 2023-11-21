@@ -5,28 +5,27 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.1.0
 
 defaults: &defaults
-  working_directory: /Users/distiller/project
+  working_directory: ~/project
   macos:
     xcode: "14.3.1"
 
 jobs:
   build:
     <<: *defaults
-    environment:
-      FL_OUTPUT_DIR: output
-      FASTLANE_LANE: build
     steps:
       - checkout
       - ruby/install-deps
       - run:
           name: fastlane
-          command: bundle exec fastlane $FASTLANE_LANE
+          command: bundle exec fastlane build
 
   analyze:
-    working_directory: /Users/distiller/project
+    working_directory: ~/project
     docker:
       - image: node:latest
     steps:
+      - run: |
+          ls -la
       - attach_workspace:
           at: "~"
       - run: |
@@ -40,15 +39,12 @@ jobs:
 
   run-tests:
     <<: *defaults
-    environment:
-      FL_OUTPUT_DIR: output
-      FASTLANE_LANE: test
     steps:
       - checkout
       - ruby/install-deps
       - run:
           name: fastlane
-          command: bundle exec fastlane $FASTLANE_LANE
+          command: bundle exec fastlane test
       - persist_to_workspace:
           root: "~"
           paths:
