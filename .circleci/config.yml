@@ -29,8 +29,7 @@ jobs:
       - attach_workspace:
           at: "~"
       - run: |
-          cd ~/project
-          bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
+          bash ~/project/fastlane/xccov-to-generic.sh ~/project/fastlane/test_output/SwiftSonarWave.xcresult > ~/project/fastlane/test_output/code-coverage.xml
       - sonarcloud/scan
 
   run-tests:
@@ -44,8 +43,6 @@ jobs:
       - run:
           name: fastlane
           command: bundle exec fastlane $FASTLANE_LANE
-      - store_artifacts:
-          path: fastlane/test_output
       - persist_to_workspace:
           root: "~"
           paths:
