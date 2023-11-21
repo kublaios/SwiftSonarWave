@@ -27,11 +27,8 @@ jobs:
       - attach_workspace:
           at: "~"
       - run: |
-          ls -la
-          cd fastlane
-          ls -la
-          cd test_output
-          ls -la
+          sh fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
+      - sonarcloud/scan
 
   run-tests:
     <<: *defaults
@@ -45,20 +42,6 @@ jobs:
           root: "~"
           paths:
             - project/fastlane/test_output
-
-  clone:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: |
-          ls -la
-      - run: |
-          mkdir fastlane/test_output
-          touch fastlane/test_output/SwiftSonarWave.xcresult
-      - persist_to_workspace:
-          root: "~"
-          paths:
-            - project
 
 workflows:
   main:
