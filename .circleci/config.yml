@@ -24,7 +24,7 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: "~"
+          at: "~/project"
       - sonarcloud/scan
 
   run-tests:
