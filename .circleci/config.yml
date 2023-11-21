@@ -26,10 +26,6 @@ jobs:
     steps:
       - attach_workspace:
           at: "~"
-      - run: |
-          ls -la
-          cd project
-          ls -la
       - sonarcloud/scan
 
   run-tests:
