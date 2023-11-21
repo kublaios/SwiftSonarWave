@@ -33,8 +33,7 @@ jobs:
       - run: |
           mkdir -p fastlane/test_output
           touch fastlane/test_output/code-coverage.xcresult
-          sh fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
-      - sonarcloud/scan
+          ls -la
 
   run-tests:
     <<: *defaults
