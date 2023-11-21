@@ -65,7 +65,7 @@ jobs:
       - persist_to_workspace:
           root: "~"
           paths:
-            - project/fastlane/test_output
+            - .
 
 workflows:
   main:
