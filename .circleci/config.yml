@@ -24,15 +24,19 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
 
   analyze:
-    working_directory: /Users/distiller/project
+    working_directory: ~/project
     docker:
       - image: node:latest
     steps:
       - attach_workspace:
           at: "~"
       - run: |
-          mkdir -p fastlane/test_output
-          touch fastlane/test_output/code-coverage.xcresult
+          ls -la
+      - run: |
+          cd fastlane
+          ls -la
+      - run: |
+          cd test_output
           ls -la
 
   run-tests:
@@ -51,7 +55,22 @@ jobs:
           paths:
             - project/fastlane/test_output
 
+  clone:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: |
+          mkdir fastlane/test_output
+          touch fastlane/test_output/SwiftSonarWave.xcresult
+      - persist_to_workspace:
+          root: "~"
+          paths:
+            - project/fastlane/test_output
+
 workflows:
   main:
     jobs:
-      - analyze
+      - clone
+      - analyze:
+          requires:
+            - clone
