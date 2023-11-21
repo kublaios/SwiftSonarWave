@@ -16,6 +16,7 @@
 		89E67F6D2B0BC16100BFE42D /* SequenceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E67F6C2B0BC16100BFE42D /* SequenceExtension.swift */; };
 		89E67F6F2B0BC28B00BFE42D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 89E67F6E2B0BC28B00BFE42D /* DequeModule */; };
 		89E67F712B0BC28B00BFE42D /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 89E67F702B0BC28B00BFE42D /* OrderedCollections */; };
+		89FF5F742B0CE9B9006FF889 /* CalculationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FF5F732B0CE9B9006FF889 /* CalculationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		89E67F4C2B0BC08100BFE42D /* SwiftSonarWaveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSonarWaveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E67F502B0BC08100BFE42D /* SwiftSonarWaveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSonarWaveTests.swift; sourceTree = "<group>"; };
 		89E67F6C2B0BC16100BFE42D /* SequenceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtension.swift; sourceTree = "<group>"; };
+		89FF5F732B0CE9B9006FF889 /* CalculationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				89E67F3F2B0BC08000BFE42D /* SwiftSonarWaveApp.swift */,
 				89E67F412B0BC08000BFE42D /* ContentView.swift */,
 				89E67F6C2B0BC16100BFE42D /* SequenceExtension.swift */,
+				89FF5F732B0CE9B9006FF889 /* CalculationHelper.swift */,
 				89E67F432B0BC08100BFE42D /* Assets.xcassets */,
 				89E67F452B0BC08100BFE42D /* Preview Content */,
 			);
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89E67F6D2B0BC16100BFE42D /* SequenceExtension.swift in Sources */,
+				89FF5F742B0CE9B9006FF889 /* CalculationHelper.swift in Sources */,
 				89E67F422B0BC08000BFE42D /* ContentView.swift in Sources */,
 				89E67F402B0BC08000BFE42D /* SwiftSonarWaveApp.swift in Sources */,
 			);
