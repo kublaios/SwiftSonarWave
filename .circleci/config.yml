@@ -27,7 +27,7 @@ jobs:
       - attach_workspace:
           at: "~"
       - run: |
-          sh fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
+          bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
       - sonarcloud/scan
 
   run-tests:
