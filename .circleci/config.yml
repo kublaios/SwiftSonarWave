@@ -4,36 +4,55 @@ orbs:
   ruby: circleci/ruby@1.2.0
   sonarcloud: sonarsource/sonarcloud@1.1.0
 
+defaults: &defaults
+  working_directory: /Users/distiller/project
+  macos:
+    xcode: "14.3.1"
+  shell: /bin/bash --login -o pipefail
+
 jobs:
   build:
-    macos:
-      xcode: "14.3.1"
-    working_directory: /Users/distiller/project
+    <<: *defaults
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: build
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - ruby/install-deps
       - run:
           name: fastlane
           command: bundle exec fastlane $FASTLANE_LANE
-      - store_artifacts:
-          path: output
-      - store_test_results:
-          path: output/scan
+
   analyze:
     docker:
       - image: node:latest
     steps:
-      - checkout
+      - attach_workspace:
+          at: "~"
+      - run: |
+          bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > fastlane/test_output/code-coverage.xml
       - sonarcloud/scan
+
+  run-tests:
+    <<: *defaults
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - persist_to_workspace:
+          root: "~"
+          paths:
+            - project/fastlane/test_output
 
 workflows:
   main:
     jobs:
-      - build
+      - run-tests
       - analyze:
           requires:
             - build
