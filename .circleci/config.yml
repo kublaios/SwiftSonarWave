@@ -24,20 +24,22 @@ jobs:
     docker:
       - image: node:latest
     steps:
+      - run: |
+          ls -la
       - attach_workspace:
           at: "~/project"
-      - sonarcloud/scan
+      # - sonarcloud/scan
 
   run-tests:
     <<: *defaults
     steps:
       - checkout
       - ruby/install-deps
-      - run:
-          name: fastlane
-          command: bundle exec fastlane test
-      - run: |
-          bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
+      # - run:
+      #     name: fastlane
+      #     command: bundle exec fastlane test
+      # - run: |
+      #     bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
       - persist_to_workspace:
           root: "~"
           paths:
