@@ -24,7 +24,7 @@ jobs:
           command: bundle exec fastlane $FASTLANE_LANE
 
   analyze:
-    working_directory: ~/project
+    working_directory: /Users/distiller/project
     docker:
       - image: node:latest
     steps:
