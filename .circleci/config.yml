@@ -41,6 +41,7 @@ jobs:
       - persist_to_workspace:
           root: "~"
           paths:
+            - project/fastlane/xccov-to-generic.sh
             - project/fastlane/test_output
 
 workflows:
