@@ -55,4 +55,4 @@ workflows:
       - run-tests
       - analyze:
           requires:
-            - build
+            - run-tests
