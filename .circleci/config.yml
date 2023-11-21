@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   ruby: circleci/ruby@1.2.0
+  sonarcloud: sonarsource/sonarcloud@1.1.0
 
 jobs:
   build:
@@ -22,3 +23,17 @@ jobs:
           path: output
       - store_test_results:
           path: output/scan
+  analyze:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - sonarcloud/scan
+
+workflows:
+  main:
+    jobs:
+      - build
+      - analyze:
+          requires:
+            - build
