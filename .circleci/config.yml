@@ -8,7 +8,6 @@ defaults: &defaults
   working_directory: /Users/distiller/project
   macos:
     xcode: "14.3.1"
-  shell: /bin/bash --login -o pipefail
 
 jobs:
   build:
@@ -59,6 +58,8 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: |
+          ls -la
       - run: |
           mkdir fastlane/test_output
           touch fastlane/test_output/SwiftSonarWave.xcresult
