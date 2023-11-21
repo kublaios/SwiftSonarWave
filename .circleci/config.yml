@@ -30,7 +30,7 @@ jobs:
           ls -la
           cd project
           ls -la
-      # - sonarcloud/scan
+      - sonarcloud/scan
 
   run-tests:
     <<: *defaults
