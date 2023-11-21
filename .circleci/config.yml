@@ -27,6 +27,8 @@ jobs:
           at: "~/project"
       - run: |
           ls -la
+          cd project
+          ls -la
       # - sonarcloud/scan
 
   run-tests:
