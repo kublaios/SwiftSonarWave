@@ -25,7 +25,7 @@ jobs:
       - image: node:latest
     steps:
       - attach_workspace:
-          at: "~/project"
+          at: "~"
       - run: |
           ls -la
           cd project
