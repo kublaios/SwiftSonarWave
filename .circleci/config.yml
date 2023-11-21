@@ -24,16 +24,12 @@ jobs:
     docker:
       - image: node:latest
     steps:
-      - run: |
-          ls -la
       - attach_workspace:
           at: "~"
       - run: |
           ls -la
-      - run: |
           cd fastlane
           ls -la
-      - run: |
           cd test_output
           ls -la
 
