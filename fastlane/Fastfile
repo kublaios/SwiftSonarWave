@@ -29,6 +29,7 @@ platform :ios do
   desc "Runs tests on the main scheme"
   lane :test do
     run_tests(
+      code_coverage: true,
       disable_package_automatic_updates: true,
       result_bundle: true,
       scheme: "SwiftSonarWave",
