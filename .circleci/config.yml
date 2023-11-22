@@ -33,11 +33,15 @@ jobs:
           name: fastlane
           command: bundle exec fastlane test
       - run: |
+          rm -rf ~/Library/Developer/Xcode/DerivedData
           bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
+          tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
       - *install_sonarscanner
       - run: |
           sonar-scanner \
             -Dsonar.token=$SONAR_TOKEN
+      - store_artifacts:
+          path: test-results.tar.gz
       - store_artifacts:
           path: code-coverage.xml
       - persist_to_workspace:
