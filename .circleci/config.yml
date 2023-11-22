@@ -9,6 +9,11 @@ defaults: &defaults
   macos:
     xcode: "14.3.1"
 
+install_sonarscanner: &install_sonarscanner
+  run:
+    name: Install SonarScanner
+    command: HOMEBREW_NO_AUTO_UPDATE=1 brew install sonar-scanner
+
 jobs:
   analyze:
     working_directory: ~/project
@@ -29,6 +34,10 @@ jobs:
           command: bundle exec fastlane test
       - run: |
           bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
+      - *install_sonarscanner
+      - run: |
+          sonar-scanner \
+            -Dsonar.login=$SONAR_TOKEN
       - store_artifacts:
           path: code-coverage.xml
       - persist_to_workspace:
@@ -40,6 +49,3 @@ workflows:
   main:
     jobs:
       - test
-      - analyze:
-          requires:
-            - test
