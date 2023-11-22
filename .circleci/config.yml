@@ -39,6 +39,11 @@ jobs:
           sonar-scanner \
             -Dsonar.token=$SONAR_TOKEN
       - store_artifacts:
+          path: fastlane/test_output
+          destination: test_output
+      - store_artifacts:
+          path: fastlane/test_output/SwiftSonarWave.xcresult
+      - store_artifacts:
           path: code-coverage.xml
       - persist_to_workspace:
           root: "~"
