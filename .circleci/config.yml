@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   ruby: circleci/ruby@1.2.0
-  sonarcloud: sonarsource/sonarcloud@1.1.0
 
 defaults: &defaults
   working_directory: ~/project
@@ -15,15 +14,6 @@ install_sonarscanner: &install_sonarscanner
     command: HOMEBREW_NO_AUTO_UPDATE=1 brew install sonar-scanner
 
 jobs:
-  analyze:
-    working_directory: ~/project
-    docker:
-      - image: node:latest
-    steps:
-      - attach_workspace:
-          at: "~"
-      - sonarcloud/scan
-
   test:
     <<: *defaults
     steps:
@@ -33,8 +23,7 @@ jobs:
           name: fastlane
           command: bundle exec fastlane test
       - run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-          bash fastlane/xccov-to-generic.sh fastlane/test_output/SwiftSonarWave.xcresult > code-coverage.xml
+          bundle exec slather coverage --sonarqube-xml --ignore '../*' --scheme SwiftSonarWave SwiftSonarWave.xcodeproj
           tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
       - *install_sonarscanner
       - run: |
@@ -43,7 +32,7 @@ jobs:
       - store_artifacts:
           path: test-results.tar.gz
       - store_artifacts:
-          path: code-coverage.xml
+          path: sonarqube-generic-coverage.xml
       - persist_to_workspace:
           root: "~"
           paths:
