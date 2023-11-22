@@ -39,16 +39,6 @@
                ReferencedContainer = "container:SwiftSonarWave.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "89E67F552B0BC08100BFE42D"
-               BuildableName = "SwiftSonarWaveUITests.xctest"
-               BlueprintName = "SwiftSonarWaveUITests"
-               ReferencedContainer = "container:SwiftSonarWave.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
