@@ -29,4 +29,10 @@ final class CalculationHelperTests: XCTestCase {
         let value = 4.0
         XCTAssertEqual(CalculationHelper().cube(value), 64.0)
     }
+
+    func testPower() {
+        let base = 2.0
+        let exponent = 3
+        XCTAssertEqual(CalculationHelper().power(base, exponent: exponent), 8.0)
+    }
 }
