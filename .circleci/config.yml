@@ -13,6 +13,11 @@ install_sonarscanner: &install_sonarscanner
     name: Install SonarScanner
     command: HOMEBREW_NO_AUTO_UPDATE=1 brew install sonar-scanner
 
+install_xcresultparser: &install_xcresultparser
+  run:
+    name: Install xcresultparser
+    command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap a7ex/homebrew-formulae && brew install xcresultparser
+
 jobs:
   test:
     <<: *defaults
@@ -22,8 +27,9 @@ jobs:
       - run:
           name: fastlane
           command: bundle exec fastlane test
+      - *install_xcresultparser
       - run: |
-          bundle exec slather coverage --sonarqube-xml --ignore '../*' --scheme SwiftSonarWave SwiftSonarWave.xcodeproj
+          xcresultparser -c -o xml fastlane/test_output/*.xcresult > sonarqube-generic-coverage.xml
           tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
       - *install_sonarscanner
       - run: |
