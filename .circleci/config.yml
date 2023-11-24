@@ -20,6 +20,25 @@ install_xcresultparser: &install_xcresultparser
     command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap a7ex/homebrew-formulae && brew install xcresultparser
 
 jobs:
+  show-attached-workspace:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: "~"
+      - run:
+          name: Show attached workspace
+          command: ls -la
+
+  show-attached-workspace-mac:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: "~"
+      - run:
+          name: Show attached workspace
+          command: ls -la
+
   test:
     <<: *defaults
     steps:
@@ -53,6 +72,12 @@ workflows:
   main:
     jobs:
       - test
+      - show-attached-workspace:
+          requires:
+            - test
+      - show-attached-workspace-mac:
+          requires:
+            - test
       - scan:
           requires:
             - test
