@@ -32,9 +32,10 @@ jobs:
     steps:
       - attach_workspace:
           at: "~"
-      - run: |
-          chmod +x bin/xcresultparser
-          bin/xcresultparser -c -o xml fastlane/test_output/SwiftSonarWave.xcresult > sonarqube-generic-coverage.xml
+      - run:
+          name: Convert xcresult files to SonarCloud compatible format
+          command: |
+            bin/xcresultparser -c -o xml fastlane/test_output/SwiftSonarWave.xcresult > sonarqube-generic-coverage.xml
       - store_artifacts:
           path: sonarqube-generic-coverage.xml
       - *install_sonarscanner
