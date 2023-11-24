@@ -47,14 +47,8 @@ jobs:
       - run:
           name: fastlane
           command: bundle exec fastlane test
-      - *install_xcresultparser
-      - run: |
-          xcresultparser -c -o xml fastlane/test_output/*.xcresult > sonarqube-generic-coverage.xml
-          tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
       - store_artifacts:
           path: test-results.tar.gz
-      - store_artifacts:
-          path: sonarqube-generic-coverage.xml
       - persist_to_workspace:
           root: "~"
           paths:
@@ -66,6 +60,12 @@ jobs:
     steps:
       - attach_workspace:
           at: "~"
+      - run: |
+          chmod +x bin/xcresultparser
+          bin/xcresultparser -c -o xml fastlane/test_output/*.xcresult > sonarqube-generic-coverage.xml
+          tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
+      - store_artifacts:
+          path: sonarqube-generic-coverage.xml
       - sonarcloud/scan
 
 workflows:
