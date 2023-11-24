@@ -39,12 +39,10 @@ jobs:
           name: Show attached workspace
           command: ls -la
 
-  print-java-version:
+  sonar-test:
     <<: *defaults
     steps:
-      - run:
-          name: Print Java version
-          command: java --version
+      - sonarcloud/scan
 
   test:
     <<: *defaults
@@ -93,6 +91,6 @@ workflows:
           requires:
             - test
 
-  java:
+  sonar-test:
     jobs:
-      - print-java-version
+      - sonar-test
