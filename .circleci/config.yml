@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-  sonarcloud: sonarsource/sonarcloud@2.0.0
   ruby: circleci/ruby@1.2.0
 
 defaults: &defaults
@@ -14,36 +13,7 @@ install_sonarscanner: &install_sonarscanner
     name: Install SonarScanner
     command: HOMEBREW_NO_AUTO_UPDATE=1 brew install sonar-scanner
 
-install_xcresultparser: &install_xcresultparser
-  run:
-    name: Install xcresultparser
-    command: HOMEBREW_NO_AUTO_UPDATE=1 brew tap a7ex/homebrew-formulae && brew install xcresultparser
-
 jobs:
-  show-attached-workspace:
-    docker:
-      - image: node:latest
-    steps:
-      - attach_workspace:
-          at: "~"
-      - run:
-          name: Show attached workspace
-          command: ls -la
-
-  show-attached-workspace-mac:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: "~"
-      - run:
-          name: Show attached workspace
-          command: ls -la
-
-  sonar-test:
-    <<: *defaults
-    steps:
-      - sonarcloud/scan
-
   test:
     <<: *defaults
     steps:
@@ -52,45 +22,32 @@ jobs:
       - run:
           name: fastlane
           command: bundle exec fastlane test
-      - store_artifacts:
-          path: test-results.tar.gz
       - persist_to_workspace:
           root: "~"
           paths:
             - project
 
   scan:
-    docker:
-      - image: node:latest
+    <<: *defaults
     steps:
       - attach_workspace:
           at: "~"
       - run: |
           chmod +x bin/xcresultparser
-          bin/xcresultparser -c -o xml fastlane/test_output/*.xcresult > sonarqube-generic-coverage.xml
-          tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
+          bin/xcresultparser -c -o xml fastlane/test_output/SwiftSonarWave.xcresult > sonarqube-generic-coverage.xml
       - store_artifacts:
           path: sonarqube-generic-coverage.xml
-      - sonarcloud/scan
+      - *install_sonarscanner
+      - run:
+          name: Run SonarScanner
+          command: |
+            sonar-scanner \
+              -Dsonar.token=$SONAR_TOKEN
 
 workflows:
   main:
     jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - na
-      - show-attached-workspace:
-          requires:
-            - test
-      - show-attached-workspace-mac:
-          requires:
-            - test
+      - test
       - scan:
           requires:
             - test
-
-  sonar-test:
-    jobs:
-      - sonar-test
