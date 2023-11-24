@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
   ruby: circleci/ruby@1.2.0
 
 defaults: &defaults
@@ -31,10 +32,6 @@ jobs:
       - run: |
           xcresultparser -c -o xml fastlane/test_output/*.xcresult > sonarqube-generic-coverage.xml
           tar -cvzf test-results.tar.gz fastlane/test_output/*.xcresult
-      - *install_sonarscanner
-      - run: |
-          sonar-scanner \
-            -Dsonar.token=$SONAR_TOKEN
       - store_artifacts:
           path: test-results.tar.gz
       - store_artifacts:
@@ -44,7 +41,18 @@ jobs:
           paths:
             - project
 
+  scan:
+    docker:
+      - image: node:latest
+    steps:
+      - attach_workspace:
+          at: "~"
+      - sonarcloud/scan
+
 workflows:
   main:
     jobs:
       - test
+      - scan:
+          requires:
+            - test
