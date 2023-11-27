@@ -40,4 +40,12 @@ struct CalculationHelper {
         let sum = values.reduce(0, +)
         return sum / Double(values.count)
     }
+
+    func percentage(_ part: Double, of total: Double) -> Double {
+        (part / total) * 100
+    }
+
+    func linearInterpolation(from start: Double, to end: Double, progress: Double) -> Double {
+        start + (end - start) * progress
+    }
 }
