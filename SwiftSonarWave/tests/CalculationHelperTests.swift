@@ -42,7 +42,6 @@ final class CalculationHelperTests: XCTestCase {
     }
 
     func testAverage() {
-        let unusedInTest = ""
         let values = [1.0, 2.0, 3.0]
         XCTAssertEqual(CalculationHelper().average(values), 2.0)
     }

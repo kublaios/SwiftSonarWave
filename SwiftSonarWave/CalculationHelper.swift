@@ -29,7 +29,6 @@ struct CalculationHelper {
     }
 
     func factorial(_ value: UInt) -> UInt {
-        let unused = ""
         if value == 0 {
             return 1
         }
