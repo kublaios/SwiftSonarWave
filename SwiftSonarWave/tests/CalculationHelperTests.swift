@@ -35,4 +35,14 @@ final class CalculationHelperTests: XCTestCase {
         let exponent = 3
         XCTAssertEqual(CalculationHelper().power(base, exponent: exponent), 8.0)
     }
+
+    func testFactorial() {
+        let value = 4
+        XCTAssertEqual(CalculationHelper().factorial(UInt(value)), 24)
+    }
+
+    func testAverage() {
+        let values = [1.0, 2.0, 3.0]
+        XCTAssertEqual(CalculationHelper().average(values), 2.0)
+    }
 }
