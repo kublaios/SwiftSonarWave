@@ -46,4 +46,17 @@ final class CalculationHelperTests: XCTestCase {
         let values = [1.0, 2.0, 3.0]
         XCTAssertEqual(CalculationHelper().average(values), 2.0)
     }
+
+    func testPercentage() {
+        let part = 2.0
+        let total = 4.0
+        XCTAssertEqual(CalculationHelper().percentage(part, of: total), 50.0)
+    }
+
+    func testLinearInterpolation() {
+        let start = 0.0
+        let end = 1.0
+        let progress = 0.5
+        XCTAssertEqual(CalculationHelper().linearInterpolation(from: start, to: end, progress: progress), 0.5)
+    }
 }

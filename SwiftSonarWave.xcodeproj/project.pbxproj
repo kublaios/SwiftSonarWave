@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EF398752B14D67A00642133 /* ContentViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF398742B14D67A00642133 /* ContentViewTests.swift */; };
 		89240F732B0E08BC00CAE2A1 /* CalculationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89240F722B0E08BC00CAE2A1 /* CalculationHelperTests.swift */; };
 		89E67F402B0BC08000BFE42D /* SwiftSonarWaveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E67F3F2B0BC08000BFE42D /* SwiftSonarWaveApp.swift */; };
 		89E67F422B0BC08000BFE42D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E67F412B0BC08000BFE42D /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3EF398742B14D67A00642133 /* ContentViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTests.swift; sourceTree = "<group>"; };
 		89240F722B0E08BC00CAE2A1 /* CalculationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHelperTests.swift; sourceTree = "<group>"; };
 		89E67F3C2B0BC08000BFE42D /* SwiftSonarWave.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSonarWave.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E67F3F2B0BC08000BFE42D /* SwiftSonarWaveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSonarWaveApp.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				89240F722B0E08BC00CAE2A1 /* CalculationHelperTests.swift */,
+				3EF398742B14D67A00642133 /* ContentViewTests.swift */,
 				89E67F502B0BC08100BFE42D /* SequenceTests.swift */,
 			);
 			path = tests;
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF398752B14D67A00642133 /* ContentViewTests.swift in Sources */,
 				89E67F512B0BC08100BFE42D /* SequenceTests.swift in Sources */,
 				89240F732B0E08BC00CAE2A1 /* CalculationHelperTests.swift in Sources */,
 			);
